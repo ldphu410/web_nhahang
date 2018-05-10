@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Handle</title>
+	<%- include ../layout/head %>
+</head>
+<body>
+	<%- include ../layout/nav %>
+
+	<div class="container">
+	<div class="row" style="margin-bottom:10px">
+		<div class="col-sm-12">
+			<a href="/admin/slides/themslides" class="btn btn-success pull-right">Thêm Slides</a>
+		</div>
+	</div>
+	</div>
+	<div class="container">
+	<div class="panel panel-default">
+        <!-- <div class="panel-heading">
+            Posts
+        </div> -->
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Button Content</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <% if(data && data.slides) {%>
+                            <% for(var i = 0; i<data.slides.length; i++) {%>
+                                <tr>
+                                    <td> <%= data.slides[i].id %> </td>
+                                    <td> <%= data.slides[i].title %> </td>
+                                    <td> <%- data.slides[i].content %> </td>
+                                    <td> <%= data.slides[i].button_content %> </td>
+                                    <td> <img src="<%= data.slides[i].image %>" alt="" class="responsive-img" width="150px" height="150px"> 
+                                       
+                                    </td>
+                                    <td>
+                                        <a href="/admin/slides/taianh/<%= data.slides[i].id %>" class="btn btn-warning">Đổi ảnh</a>
+                                        <a href="/admin/slides/suaslides/<%= data.slides[i].id %>" class="btn btn-primary">Sửa thông tin</a>
+                                        <button class="btn btn-danger slide_xoa" slides_id="<%= data.slides[i].id %>">Xóa</button>
+                                    </td>
+                                </tr>   
+                            <%}%>
+                       <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+     </div>
+     </div>
+     <script type="text/javascript" src="/static/js/slides.js"></script>
+</body>
+</html>

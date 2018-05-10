@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<%- include ../layout/head %>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  	<script>tinymce.init({ selector:'textarea' });</script>
+</head>
+<body>
+	<div class="container">
+		<%- include ../layout/menu %>
+
+		<div class="panel panel-default">
+           <!--  <div class="panel-heading">
+                Add new Post
+            </div> -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                    	<% if(data && data.error){%>
+			            <div id="login-alert" class="alert alert-danger col-sm-12">
+			               <%= data.error %> 
+			            </div>
+			            <%}%>
+
+                        <form role="form" class="AVAST_PAM_nonloginform" method="" action="">
+                            <input type="hidden" name="id" class="id" value="<% if(data && data.post) {%> <%= data.post.id %> <%}%>">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" class="form-control title" name="title"
+                                value="<% if(data && data.post) {%> <%= data.post.title %> <%}%>">         
+                            </div>
+                             <div class="form-group">
+                                <label>Content</label>
+                                <textarea type="text" class="form-control content" name="content"> <% if(data && data.post) {%> <%= data.post.content %> <%}%></textarea>        
+                            </div>
+                            <div class="form-group">
+                                <label>Button's content</label>
+                                <input type="text" class="form-control button_content" name="button_content" 
+                                value="<% if(data && data.post) {%> <%= data.post.button_content %> <%}%>">         
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control image" name="image" value="<% if(data && data.post) {%> <%= data.post.image %> <%}%>">
+
+                            </div> 
+                                                        
+							<input type="button" name="" value="Edit" class="btn btn-warning slide_edit">
+                        </form> 
+
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+	</div> 
+    
+    <script type="text/javascript" src="/static/js/slides.js"></script>
+</body>
+</html>
