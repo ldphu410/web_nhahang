@@ -1,50 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	<title> Trang Chủ  </title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">  
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&amp;subset=vietnamese" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
-
-
-	<script type="text/javascript" src="/static/vendor/bootstrap.js"></script>
-
-
- 	<script type="text/javascript" src="/static/vendor/isotope.pkgd.min.js"></script>
- 	<script type="text/javascript" src="/static/vendor/imagesloaded.pkgd.min.js"></script>
- 	<script type="text/javascript" src="/static/js/1.js"></script>
-
-	<link rel="stylesheet" href="/static/vendor/bootstrap.css">
-	<link rel="stylesheet" href="/static/vendor/font-awesome.css">
-	<link rel="stylesheet" href="/static/css/1.css">
+	<%- include ../admin/layout/head %>
  </head>
 <body >
-	
+	<%- include ../admin/layout/topheader %>
 		
- 	<div class="topheader">
- 		<div class="container">
-
- 			<div class="row">
- 				<div class="col-sm-6 wow jello">
- 					<div class="mangxh float-sm-left text-xs-center text-sm-left">
-						<a href="<%= header.post.fb %>"><i class="fa fa-facebook"></i></a>
-						<!-- <a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-pinterest"></i></a> -->
-						<a href="<%= header.post.mail %>"><i class="fa fa-google-plus"></i></a>
- 					 </div>
- 					<div class="datban">
- 						Call for reservation: <%= header.post.sdt %>
- 					 </div>
- 				</div>
- 				<div class="col-sm-6 ">
- 					<div class="datban openingtop float-sm-right text-sm-left text-xs-center">
- 						Opening Hours : <%= header.post.time %>
- 					</div>
- 				</div>
- 			</div> <!-- het row -->
- 		</div> <!-- het container -->
- 	</div> <!-- het topheader  -->
+ 	
  	<div class="logovamenu">
 	    <nav class="navbar navbar-light  fontroboto">
 	    	<div class="container">    	
@@ -58,12 +20,22 @@
 			         <li class="nav-item">
 			            <a class="nav-link" href="/">Home  </a>
 			          </li>
-			          <li class="nav-item active">
-			            <a class="nav-link" href="/admin">Admin</a>
+			          <!-- <li class="nav-item active">
+			            <a class="nav-link" href="/admin">User</a>
 			          </li>
 			          <li class="nav-item">
 			            <a class="nav-link" href="/admin/signin">Sign in</a>
-			          </li>
+			          </li> -->
+			          <li class="nav-item dropdown active">
+						    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+						    <div class="dropdown-menu">
+						      <a class="dropdown-item" href="#">User</a>
+						      <a class="dropdown-item active1" href="/admin/signin">Sign in</a>
+						      <a class="dropdown-item" href="/admin/signup">Sign up</a>
+						      <div class="dropdown-divider"></div>
+						      <a class="dropdown-item active1" href="/admin">Admin</a>
+						    </div>
+  					</li>
 			         <li class="nav-item datbanmenu">
 			            <a class="nav-link btn btn-warning wow bounce" data-wow-iteration="3" href="#" >Reservation</a>
 			          </li>
@@ -135,10 +107,11 @@
 
  	<div class="thucdonct wow fadeInUp">
  		<div class="tieudect text-xs-center fontroboto">
- 			<a href="" data-monan="*">All </a>
- 			<a href="" data-monan=".sang">Breakfast</a>
- 			<a href="" data-monan=".trua">Lunch</a>
- 			<a href="" data-monan=".toi">Dinner</a> 
+ 			
+		 			<a href="" data-monan="*"><%= menuTC.post.atr1 %> </a>
+		 			<a href="" data-monan=".sang"><%= menuTC.post.atr2 %></a>
+		 			<a href="" data-monan=".trua"><%= menuTC.post.atr3 %></a>
+		 			<a href="" data-monan=".toi"><%= menuTC.post.atr4 %></a> 
  		</div>
  		<div class="noidungct">
  			 <div class="container">

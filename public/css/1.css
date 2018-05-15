@@ -1094,3 +1094,12 @@ a.nutchitiet:hover {
     background-color: #f0ad4e;
     color: white;
 }
+
+.dropdown .dropdown-item{
+    font-family: 'Dancing Script', cursive;
+}
+
+.active1{
+    font-weight: bold;
+    color: #f5a432;
+}

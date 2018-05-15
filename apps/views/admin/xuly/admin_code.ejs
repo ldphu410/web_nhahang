@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <%- include ../layout/head %>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <style>
+    	 body{
+		    background: url(/static/images/dangnhapadmin.jpg);
+		    background-attachment: scroll;
+		    background-position: center center;
+		    -webkit-background-size: cover;
+		    -moz-background-size: cover;
+		    -o-background-size: cover;
+		    background-size: cover;
+    	}
+    </style>
+</head>
+<body>	
+    <div class="container">
+        <%- include ../layout/menu %>
+    </div>	
+
+    <div class="container">
+        <form role="form" class="AVAST_PAM_nonloginform" method="POST" action="/admin/code">
+            <div class="form-group">
+                <label>Nhập Code:</label>
+                <input type="hidden" class="form-control" name="pass" placeholder="Code">         
+            </div>
+            <input type="submit" name="" value="Gửi" class="btn btn-warning">
+        </form>
+    </div>
+</body>

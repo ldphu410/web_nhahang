@@ -10,5 +10,7 @@
 		"user":"root",
 		"password":"123456"
 	},
-	"secret_key": "secretkey"
+	"salt":10,
+	"secret_key": "secretkey",
+	"pass_admin": "ledinhphu"
 }

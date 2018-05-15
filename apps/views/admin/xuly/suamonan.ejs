@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<%- include ../layout/head %>
-	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-  	<script>tinymce.init({ selector:'textarea' });</script>
+    <meta charset="UTF-8">
+    <title></title>
+    <%- include ../layout/head %>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 <body>
-	<div class="container">
-		<%- include ../layout/menu %>
+    <div class="container">
+        <%- include ../layout/menu %>
 
-		<div class="panel panel-default">
+        <div class="panel panel-default">
            <!--  <div class="panel-heading">
                 Add new Post
             </div> -->
@@ -19,45 +19,42 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                    	<% if(data && data.error){%>
-			            <div id="login-alert" class="alert alert-danger col-sm-12">
-			               <%= data.error %> 
-			            </div>
-			            <%}%>
+                        <% if(data && data.error){%>
+                        <div id="login-alert" class="alert alert-danger col-sm-12">
+                           <%= data.error %> 
+                        </div>
+                        <%}%>
 
                         <form role="form" class="AVAST_PAM_nonloginform" method="" action="">
-                            <input type="hidden" name="id" class="id" value="<% if(data && data.post) {%> <%= data.post.id %> <%}%>">
+                            <input type="hidden" class="id" name="id"  value="<% if(data && data.post){ %><%= data.post.id %><%}%>">
                             <div class="form-group">
                                 <label>Tên</label>
-                                <input type="text" class="form-control ten" name="ten" placeholder="Tên" 
-                                value="<% if(data && data.post) {%> <%= data.post.ten %> <%}%>">         
+                                <input type="text" class="form-control ten" name="ten" placeholder="Tên" value="<% if(data && data.post){ %><%= data.post.ten %><%}%>">         
                             </div>
                             <div class="form-group">
                                 <label>Giá</label>
-                                <input type="text" class="form-control gia" name="gia" placeholder="Giá"
-                                value="<% if(data && data.post) {%> <%= data.post.gia %> <%}%>">         
+                                <input type="text" class="form-control gia" name="gia" placeholder="Giá" value="<% if(data && data.post){ %><%= data.post.gia %><%}%>">         
                             </div>
                             <div class="form-group">
                                 <label>Giới thiệu</label>
-                                <input type="text" class="form-control gioithieu" name="gioithieu" placeholder="Giới thiệu"
-                                value="<% if(data && data.post) {%> <%= data.post.gioithieu %> <%}%>">         
+                                <input type="text" class="form-control gioithieu" name="gioithieu" placeholder="Giới thiệu" value="<% if(data && data.post){ %><%= data.post.gioithieu %><%}%>">         
                             </div>
                             <div class="form-group">
                                 <label>Nguyên liệu</label>
-                                <textarea type="text" class="form-control nguyenlieu" name="nguyenlieu" placeholder="Nguyên liệu"> <% if(data && data.post) {%> <%= data.post.nguyenlieu %> <%}%></textarea>        
+                                <textarea type="text" class="form-control nguyenlieu" name="nguyenlieu" placeholder="Nguyên liệu"><% if(data && data.post){ %><%= data.post.nguyenlieu %><%}%></textarea>        
                             </div>
                             <div class="form-group">
                                 <label>Bữa</label>
-                                <input type="text" class="form-control bua" name="bua" placeholder="Bữa"
-                                value="<% if(data && data.post) {%> <%= data.post.bua %> <%}%>">         
+                                <input type="text" class="form-control bua" name="bua" placeholder="Bữa" value="<% if(data && data.post){ %><%= data.post.bua %><%}%>">         
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control hinhanh" name="hinhanh" value="<% if(data && data.post) {%> <%= data.post.hinhanh %> <%}%>">
-
+                                <input type="hidden" class="form-control hinhanh" name="hinhanh" value="<% if(data && data.post){ %><%= data.post.hinhanh %><%}%>">         
                             </div> 
-            
-							<input type="button" name="" value="Edit" class="btn btn-warning edit">
-                        </form> 
+                                    
+                            <input type="button" name="" value="Edit" class="btn btn-warning monan_edit">
+                        </form>
+      
+                
 
                     </div>
                     <!-- /.col-lg-6 (nested) -->
@@ -66,8 +63,8 @@
             </div>
             <!-- /.panel-body -->
         </div>
-	</div> 
-    
+    </div> 
+
     <script type="text/javascript" src="/static/js/edit.js"></script>
 </body>
 </html>

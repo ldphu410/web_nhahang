@@ -53,7 +53,7 @@ function updateMonAn(params){
 	if(params){
 		var defer = q.defer()
 
-		var query = conn.query('UPDATE monan SET ten=?, gia=?, nguyenlieu=?, hinhanh=? gioithieu=?, bua=? WHERE id=?',
+		var query = conn.query('UPDATE monan SET ten=?, gia=?, nguyenlieu=?, hinhanh=?, gioithieu=?, bua=? WHERE id=?',
 			[params.ten, params.gia, params.nguyenlieu, params.hinhanh, params.gioithieu, params.bua ,params.id], (err, result)=>{
 			if(err){
 				defer.reject(err)

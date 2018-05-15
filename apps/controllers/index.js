@@ -10,6 +10,7 @@ var user_md = require("../models/user")
 var monan_md= require("../models/monan")
 var header_md= require("../models/header")
 var slides_md= require("../models/slides")
+var menuTC_md= require("../models/menuTrangChu")
 
 router.get("/",(req,res)=>{
 	//Header
@@ -33,6 +34,16 @@ router.get("/",(req,res)=>{
 		}
 	})
 
+	//Menu Trang Chủ
+	var menuTC = menuTC_md.getAllMenuTC()
+	var menuTC1 =""
+	menuTC.then((posts)=>{
+		var post = posts[0]
+			menuTC1 = {
+				post: post,
+				error:false
+			}
+	})
 
 	var data = monan_md.getAllMonAn()
 
@@ -41,9 +52,9 @@ router.get("/",(req,res)=>{
 			cacmonan: cacmonan,
 			error: false
 		}
-		res.render("nhahang/trangchu",{data: data, header:header1, slides:slides1})
+		res.render("nhahang/trangchu",{data: data, header:header1, slides:slides1, menuTC:menuTC1})
 	}).catch((err)=>{
-		res.render("nhahang/trangchu",{data:{error:"Get Post data is error"},header:header1, slides:slides1})
+		res.render("nhahang/trangchu",{data:{error:"Get Post data is error"},header:header1, slides:slides1,menuTC:menuTC1})
 	})
 })
 

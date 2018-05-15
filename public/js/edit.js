@@ -1,15 +1,16 @@
 function Edit(){
 	function bindEvent(){
-		$('.edit').click(function(event) {
+		$('.monan_edit').click(function(event) {
 			/* Act on the event */
 			var params = {
 				id: $('.id').val(),
 				ten: $('.ten').val(),
 				gia: $('.gia').val(),
-				gioithieu: $('.gioithieu').val(),
 				nguyenlieu: tinymce.get("nguyenlieu").getContent(),
-				bua: $('.bua').val(),
-				hinhanh: $('.hinhanh').val()
+				hinhanh: $('.hinhanh').val(),
+				gioithieu: $('.gioithieu').val(),
+				bua: $('.bua').val()
+				
 			}
 
 			var base_url = location.protocol + "//" + document.domain + ":" + location.port;
