@@ -3,6 +3,7 @@ var multer = require('multer')
 var ejs = require('ejs')
 var path = require('path')
 var config = require('config')
+var nodemailer = require('nodemailer');
 
 //Init router
 var router = express.Router()
@@ -116,6 +117,12 @@ router.post("/admin_signin",(req,res)=>{
 				if(!status){
 					res.render("admin_signin",{data:{error:"Password wrong"}})
 				}else{
+					if(req.session.user){
+						req.session.destroy((err)=>{
+							if(err){console.log("FAILED")}
+							else{console.log("SUCCESS")}
+						})
+					}	
 					req.session.admin = user
 					res.redirect("/") 
 				}
@@ -135,6 +142,45 @@ router.get("/signup",(req,res)=>{
 	res.render("signup",{data:{}})
 })
 
+// router.post("/signup",(req,res)=>{
+// 	var user = req.body
+	
+// 	if(user.email.trim().length==0){
+// 		res.render("signup",{data:{error:"Email is required"}})
+// 	}
+
+// 	else if(user.passwd != user.repasswd && user.passwd.trim().length != 0){
+// 		res.render("signup",{data:{error:"Password not match"}})	
+// 	}
+// 	else{	
+// 		//Insert to DB
+// 		var password = helper.hash_password(user.passwd)
+// 		user={
+// 			email: user.email,
+// 			password: password,
+// 			first_name: user.firstname,
+// 			last_name: user.lastname
+// 		}
+
+// 		//su dung ham trong model user_md.addUser(user)
+
+// 		var result = user_md.addUser(user)                      
+// 		result.then(function(data){
+// 		res.redirect("/admin/signin")       
+// 		}).catch(function(err){
+// 		res.render("signup",{data: {error: err}})
+// 		});		
+//     }
+	
+// })
+
+var signupInfo ={
+	email: '',
+	password: '',
+	first_name: '',
+	last_name: ''
+}
+var code=""
 router.post("/signup",(req,res)=>{
 	var user = req.body
 	
@@ -146,24 +192,65 @@ router.post("/signup",(req,res)=>{
 		res.render("signup",{data:{error:"Password not match"}})	
 	}
 	else{	
-		//Insert to DB
+		var code1 = Math.floor((Math.random() * 50000) + 10000)
+		code = code1
+		var transporter = nodemailer.createTransport({
+		  service: 'gmail',
+		  auth: {
+		    user: config.get("gmail.username"), //config
+		    pass: config.get("gmail.pass")	//config
+		  }
+		});
+
+		var mailOptions = {
+		  from: config.get("gmail.username"), //config
+		  to: user.email,		 //signup
+		  subject: 'Mã xác nhận ',
+		  text: `👻Code: ${code1}`
+		};
+
+		transporter.sendMail(mailOptions, function(error, info){
+		  if (error) {
+		    console.log(error);
+		  } else {
+		    console.log('Email sent: ' + info.response);
+		  }
+		});
+
 		var password = helper.hash_password(user.passwd)
-		user={
+		var data={
+			email: user.email,
+			password: password,
+			first_name: user.firstname,
+			last_name: user.lastname,
+			code1: code1
+		}
+
+		signupInfo={
 			email: user.email,
 			password: password,
 			first_name: user.firstname,
 			last_name: user.lastname
-		}
-
-		//su dung ham trong model user_md.addUser(user)
-
-		var result = user_md.addUser(user)                      
-		result.then(function(data){
-		res.redirect("/admin/signin")       
-		}).catch(function(err){
-		res.render("signup",{data: {error: err}})
-		});		
+		}		
+		res.render("code",{data:data})
     }
+	
+})
+
+router.post("/signup/code",(req,res)=>{
+	var user = req.body
+
+	if(user.pass != code){
+		res.render("code",{data: {error: "Code không hợp lệ"}})
+		
+	}else{
+		var result = user_md.addUser(signupInfo)                      
+		result.then(function(data){
+			res.redirect("/admin/signin")       
+		}).catch(function(err){
+			res.render("code",{data: {error: err}})
+		});
+	}
 	
 })
 
@@ -174,6 +261,7 @@ router.get("/signin",(req,res)=>{
 })
 
 router.post("/signin",(req,res)=>{
+
 	var param = req.body
 	if(param.email.trim().length == 0){
 		res.render("signin",{data:{error:"Please enter an email"}})
@@ -188,6 +276,12 @@ router.post("/signin",(req,res)=>{
 					res.render("signin",{data:{error:"Password wrong"}})
 				}else{
 					req.session.user = user
+					if(req.session.admin){
+						req.session.destroy((err)=>{
+							if(err){console.log("FAILED")}
+							else{console.log("SUCCESS")}
+						})
+					}	
 					res.redirect("/") 
 				}
 			})

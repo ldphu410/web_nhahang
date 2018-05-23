@@ -12,5 +12,9 @@
 	},
 	"salt":10,
 	"secret_key": "secretkey",
-	"pass_admin": "ledinhphu"
+	"pass_admin": "ledinhphu",
+	"gmail":{
+		"username":"finalnhahang@gmail.com",
+		"pass" :"webcuoiky"
+	}
 }
