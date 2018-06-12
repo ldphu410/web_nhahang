@@ -15,6 +15,7 @@ var user_md = require("../models/user")
 var monan_md= require("../models/monan")
 var header_md= require("../models/header")
 var slides_md= require("../models/slides")
+var chinhanh_md=require("../models/chinhanh")
 
 
 
@@ -108,28 +109,40 @@ router.post("/admin_signin",(req,res)=>{
 	if(param.email.trim().length == 0){
 		res.render("admin_signin",{data:{error:"Please enter an email"}})
 	}else{
-		var data =  admin_md.getAdminByEmail(param.email)
-		if(data){
-			data.then((users)=>{
-				var user = users[0]
-				// var pass = param.password
-				var status = helper.compare_password(param.password, user.password)
-				if(!status){
-					res.render("admin_signin",{data:{error:"Password wrong"}})
-				}else{
-					if(req.session.user){
-						req.session.destroy((err)=>{
-							if(err){console.log("FAILED")}
-							else{console.log("SUCCESS")}
-						})
-					}	
-					req.session.admin = user
-					res.redirect("/") 
-				}
-			})
-		}else{
-			res.render("admin_signin",{data:{error:"User not exists"}})
-		}
+
+		
+			var data =  admin_md.getAdminByEmail(param.email)
+			if(data){
+				data.then((users)=>{
+					var user = users[0]
+					// var pass = param.password
+					
+						var status = helper.compare_password(param.password, user.password)
+						if(!status){
+							res.render("admin_signin",{data:{error:"Password wrong"}})
+						}else{
+							if(req.session.user){
+								req.session.destroy((err)=>{
+									helper.set_TEMP(0)
+									helper.set_ID(-1)
+									if(err){console.log("FAILED")}
+									else{console.log("SUCCESS")}
+								})
+							}	
+							req.session.admin = user
+							helper.set_TEMP(1)
+							helper.set_ID(user.id)
+							res.redirect("/")
+							//-----------------------------Render------------------------
+							
+						}
+		
+				}).catch((err)=>{
+					res.render("admin_signin",{data:{error:"User not exists"}})
+				})
+			}else{
+				res.render("admin_signin",{data:{error:"User not exists"}})
+			}		
 	}
 
 })
@@ -254,6 +267,10 @@ router.post("/signup/code",(req,res)=>{
 	
 })
 
+// router.post("/signup/code1",(req,res)=>{
+	
+// }
+
 
 router.get("/signin",(req,res)=>{
 	
@@ -266,6 +283,7 @@ router.post("/signin",(req,res)=>{
 	if(param.email.trim().length == 0){
 		res.render("signin",{data:{error:"Please enter an email"}})
 	}else{
+
 		var data =  user_md.getUserByEmail(param.email)
 		if(data){
 			data.then((users)=>{
@@ -277,13 +295,20 @@ router.post("/signin",(req,res)=>{
 				}else{
 					req.session.user = user
 					if(req.session.admin){
+						helper.set_TEMP(0)
+						helper.set_ID(-1)
 						req.session.destroy((err)=>{
 							if(err){console.log("FAILED")}
 							else{console.log("SUCCESS")}
 						})
-					}	
+					}
+					// config.set("temp") = true
+					helper.set_TEMP(1)
+					helper.set_ID(user.id)
 					res.redirect("/") 
 				}
+			}).catch((err)=>{
+				res.render("signin",{data:{error:"User not exists"}})
 			})
 		}else{
 			res.render("signin",{data:{error:"User not exists"}})
@@ -550,7 +575,6 @@ router.get("/monan/suamonan/:id",(req,res)=>{
 router.put("/monan/suamonan",(req,res)=>{
 
 	var params = req.body
-
 	data = monan_md.updateMonAn(params)
 
 	if(!data){
@@ -755,7 +779,7 @@ router.put("/slides/suaslides",(req,res)=>{
 })
 
 router.get("/slides/themslides",(req,res)=>{
-	if(req.sess.admin){
+	if(req.session.admin){
 			//Header
 		var header = header_md.getHeaderById(1)
 		var header1=""
@@ -927,4 +951,228 @@ router.post("/slides/taianh/:id",(req,res)=>{
 })
 
 
-module.exports=router
+//--------------------------------Chi Nhánh--------------------------------------------//
+
+router.get('/chinhanh', (req, res)=>{
+	//Header
+	var header = header_md.getHeaderById(1)
+	var header1=""
+	header.then((posts)=>{
+				var post = posts[0]
+				header1 = {
+					post: post,
+					error:false
+				}
+	})
+	var data = chinhanh_md.getAllChiNhanh()
+	data.then((chinhanh)=>{
+		var data = {
+			chinhanh: chinhanh,
+			error: false
+		}
+		res.render("admin/xuly/chinhanh",{data: data, header:header1})
+	}).catch((err)=>{
+		res.render("admin/xuly/chinhanh",{data:{error:"Get Post data is error"},header:header1})
+	})
+})
+
+router.get('/chinhanh/taianh/:id',(req,res)=>{
+	var params = req.params
+		var id = params.id
+		res.render("admin/xuly/taianh2",{id:id, msg:""})
+})
+
+
+router.post("/chinhanh/taianh/:id",(req,res)=>{
+	var params = req.params
+	var id = params.id
+	upload(req,res,(err)=>{
+		if(err){
+			res.render(`admin/xuly/taianh2`,{
+				id:id,
+				anhchinhanh:"",
+				msg:err
+			})
+		}else{
+			if(req.file == undefined){
+				res.render(`admin/xuly/taianh2`,{
+					id:id,
+					anhchinhanh:"",
+					msg:'ERROR: No File Selected'
+				})
+			}else{
+				var data = chinhanh_md.taiAnhChiNhanh(id, `/static/images/${req.file.filename}`)
+				data.then((result)=>{
+					res.redirect("/admin/chinhanh")
+				}).catch((err)=>{
+					res.render(`admin/xuly/taianh2`,{
+						id:id,
+						anhchinhanh:`/static/images/${req.file.filename}`,
+						msg:'File Uploaded',
+						file:`/static/images/${req.file.filename}`
+					})
+				})	
+			}
+		}
+	})
+})
+
+router.get("/chinhanh/suachinhanh/:id",(req,res)=>{
+		var params = req.params
+		var id = params.id
+
+		var data = chinhanh_md.getChiNhanhById(id)
+
+		if(data){
+			data.then((posts)=>{
+				var post = posts[0]
+				var data = {
+					post: post,
+					error:false
+				}
+
+				res.render("admin/xuly/suachinhanh",{data:data})
+			}).catch((err)=>{
+				var data = {error:"Could not get slide by ID"}
+				res.render("admin/xuly/suachinhanh",{data:data})
+			})
+		}else{
+			var data = {error:"Could not get slide by ID"}
+			res.render("admin/xuly/suachinhanh",{data:data})
+		}
+})
+
+router.put("/chinhanh/suachinhanh",(req,res)=>{
+	var params = req.body
+
+	data = chinhanh_md.updateChiNhanh(params)
+
+	if(!data){
+		res.json({status_code: 500})
+	}else{
+		data.then((result)=>{
+			res.json({status_code:200})
+		}).catch(function(err){
+			res.json({status_code:500})
+		})
+	}
+})
+
+
+router.get("/chinhanh/themchinhanh",(req,res)=>{
+	if(req.session.admin){
+		//Header
+		var header = header_md.getHeaderById(1)
+		var header1=""
+		header.then((posts)=>{
+				var post = posts[0]
+				header1 = {
+					post: post,
+					error:false
+				}
+		})
+		res.render("admin/xuly/themchinhanh.ejs",
+			{
+				data:{error:false},
+				header:header1,
+				anhchinhanh:"",
+				msg:""
+		})
+	}else{
+		res.redirect("/admin/admin_signin")
+	}	
+	
+})
+
+
+
+router.post("/chinhanh/themchinhanh",(req,res)=>{
+		params = req.body
+
+		if(params.ten.trim().length == 0){
+			var data={
+				error:"Tên không được trống"
+			}
+			res.render("admin/xuly/themchinhanh",{data:data, anhchinhanh:"", msg:""})
+		}else if(params.thongtin.trim().length == 0){
+			var data={
+				error:"Thông tin không được trống"
+			}
+			res.render("admin/xuly/themchinhanh",{data:data, anhchinhanh:"", msg:""})
+		}else if(params.hinhanh.trim().length == 0){
+			var data={
+				error:"Bạn cần thêm ảnh cho chi nhánh"
+			}
+			res.render("admin/xuly/themchinhanh",{data:data, anhchinhanh:"", msg:""})
+		}
+		else{
+			params={
+				ten: params.ten,
+				thongtin: params.thongtin,
+				hinhanh:params.hinhanh,
+			}
+
+			var data = chinhanh_md.themChiNhanh(params);
+			data.then((result)=>{
+				res.redirect("/admin/chinhanh")
+			}).catch((err)=>{
+				var data={
+					error:"Could not insert Chi Nhánh"
+				}
+				res.render("admin/xuly/themchinhanh",{data:data, anhchinhanh:"", msg:""})
+			})
+		}
+})
+
+router.post("/chinhanh/themchinhanh/themanh",(req,res)=>{	
+			upload(req,res,(err)=>{
+			if(err){
+				res.render('admin/xuly/themchinhanh',{
+					data:{error:false},
+					anhchinhanh:"",
+					msg:err
+		
+				})
+			}else{
+				if(req.file == undefined){
+					res.render('admin/xuly/themchinhanh',{
+						data:{error:false},
+						anhchinhanh:"",
+						msg:'ERROR: No File Selected'
+				
+					})
+				}else{
+					//Them Anh vao DB
+
+					console.log(req.file)
+					console.log(req.file.path)
+					res.render('admin/xuly/themchinhanh',{
+						anhchinhanh:`/static/images/${req.file.filename}`,
+
+						data:{error:false},
+						msg:'File Uploaded',
+						file:`/static/images/${req.file.filename}`
+					})
+				}
+			}
+		})
+})
+
+
+router.delete("/chinhanh/delete",(req,res)=>{
+	var chinhanh_id = req.body.id
+	var data = chinhanh_md.xoaChiNhanh(chinhanh_id)
+
+	if(!data){
+		res.json({status_code: 500})
+	}else{
+		data.then((result)=>{
+			res.json({status_code:200})
+		}).catch(function(err){
+			res.json({status_code:500})
+		})
+	}
+})
+
+
+module.exports=router;

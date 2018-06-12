@@ -1,0 +1,40 @@
+html, body{
+    background: url(/static/images/background-signup.jpeg);
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    
+
+}
+
+.code {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 29%;
+    top: 50%;
+    /* display: block; */
+    transform: translateY(50%);
+    /* transform: translateX(-50%); */
+    text-align: center;
+}
+
+
+.container {
+    position: relative;
+}
+
+label {
+    /* text-align: left !important; */
+    color: #c85a17;
+    font-size: 20px;
+}
+
+form.AVAST_PAM_nonloginform {
+    border: 1px solid #1d0909;
+    background-color: #5d5a51c2;
+}

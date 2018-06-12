@@ -1,0 +1,68 @@
+ 
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+       
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        width: 800px;
+        height: 450px;
+        z-index: 1;
+      }
+
+      .control-left-wrapper{
+      	z-index: 0;
+      	position: absolute;
+      	left:0;
+      	top:60px;
+      	cursor: pointer;
+      	margin: 14px 10px 0;
+      }
+
+      .control-left-wrapper .zoom-in,
+      .control-left-wrapper .zoom-out,
+      .control-left-wrapper .current-location{
+      	background: #008000;
+      	padding: 8px;
+      	font-size: 18px;
+      	color: white;
+      	border: 1px solid white;
+      	border-radius: 8px;
+      	text-align: center;
+      }
+
+
+.trai {
+    float: left;
+    width: 15%;
+    position: absolute;
+    text-align: center;
+    /* right: -88px; */
+    display: inline-block;
+    left: 10%;
+}
+
+.phai {
+    float: right;
+    width: 75%;
+    /* position: absolute; */
+}
+
+.gmap {
+    top:30px;
+    width:  100%;
+    text-align:  center;
+    /* display: inline-block; */
+    margin: auto;
+    position: relative;
+}
+
+li{
+  list-style-type: none;
+};
+
+.s{
+  display: none;
+}

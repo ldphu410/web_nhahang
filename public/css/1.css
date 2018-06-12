@@ -451,7 +451,7 @@ span.vang {
 
 .slidemonan {
     margin-top: 100px;
-    background: url(images/BG2.jpg);
+    background: url(/static/images/BG2.jpg);
     background-size: cover;
     color: white;
     margin-bottom: 20px;
@@ -1107,4 +1107,29 @@ a.nutchitiet:hover {
 .phantrang{
     float: right;
     text-align:center;
+}
+
+.comentBox{
+    padding: 1%;
+    width:96%;
+    border:1px solid #000;
+    background-color: #f0f0f0; 
+}
+
+.leftPanelImg{
+    width: 10%;
+    float: left;
+}
+
+.leftPanelImg img{
+    border-radius: 100%;
+}
+
+.rightPanel{
+    width: 85%;
+    float: left;
+    margin-left: 1%;
+}
+.clear{
+    clear: both;
 }

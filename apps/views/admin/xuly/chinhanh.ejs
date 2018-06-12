@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Handle</title>
+	<%- include ../layout/head %>
+</head>
+<body>
+	<%- include ../layout/nav %>
+
+	<div class="container">
+	<div class="row" style="margin-bottom:10px">
+		<div class="col-sm-12">
+			<a href="/admin/chinhanh/themchinhanh" class="btn btn-success pull-right">Thêm Chi Nhánh</a>
+		</div>
+	</div>
+	</div>
+	<div class="container">
+	<div class="panel panel-default">
+        <!-- <div class="panel-heading">
+            Posts
+        </div> -->
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Thông Tin</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <% if(data && data.chinhanh) {%>
+                            <% for(var i = 0; i<data.chinhanh.length; i++) {%>
+                                <tr>
+                                    <td> <%= data.chinhanh[i].id %> </td>
+                                    <td> <%= data.chinhanh[i].ten %> </td>
+                                    <td> <%- data.chinhanh[i].thongtin %> </td>
+                                    <td> <img src="<%= data.chinhanh[i].hinhanh %>" alt="" class="responsive-img" width="150px" height="150px"> 
+                                       
+                                    </td>
+                                    <td>
+                                        <a href="/admin/chinhanh/taianh/<%= data.chinhanh[i].id %>" class="btn btn-warning">Đổi ảnh</a>
+                                        <a href="/admin/chinhanh/suachinhanh/<%= data.chinhanh[i].id %>" class="btn btn-primary">Sửa thông tin</a>
+                                       <button class="btn btn-danger chinhanh_xoa" chinhanh_id="<%= data.chinhanh[i].id %>">Xóa</button>
+                                    </td>
+                                </tr>   
+                            <%}%>
+                       <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+     </div>
+     </div>
+     <script type="text/javascript" src="/static/js/chinhanh.js"></script>
+</body>
+</html>

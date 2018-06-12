@@ -4,16 +4,23 @@
     <title>Sign In</title>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/1_1.css">
+    
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 
+
+    
 </head>
+
 <body>
-    <div class="container">    
+    <div class="container ctn-1" > 
+        <div class="box">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                 <div class="panel-heading">
@@ -40,6 +47,11 @@
                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
                 </div>
 
+                <div class="input-group show">
+					<input id="check3" name="check3" type="checkbox" value="show password" onclick="myFunction()">
+					<label class="check" for="check3">Show password</label>
+				</div>
+
                 <div style="margin-top:10px" class="form-group">
                     <!-- Button -->
 
@@ -64,6 +76,18 @@
         </div>                     
     </div>  
     </div>
+    </div>
 </div>
+
+<script>
+				function myFunction() {
+					var x = document.getElementById("login-password");
+					if (x.type === "password") {
+						x.type = "text";
+					} else {
+						x.type = "password";
+					}
+				}
+			</script>
 
 </body>

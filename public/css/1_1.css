@@ -1,0 +1,42 @@
+html, body{
+    background: url(/static/images/background-signup.jpeg);
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    
+
+}
+
+.ctn-1{
+    position: relative;
+    top:75px;
+}
+
+.panel-info>.panel-heading {
+    color: #080808;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+
+.btn-success {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+    left: 43%;
+    position: relative;
+    
+}
+
+.but{
+    left: 25%;
+}
+
+.show{
+    font-family: segoe ui light;
+}
+

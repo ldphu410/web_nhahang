@@ -120,6 +120,24 @@
 		</div>
 	</div>  <!-- HET THONG TIN 2 ABOUT -->
 
+<div class="comment  wow fadeInUp">
+	<div class="container">
+		<div class="row nhapcmt">
+			<div class="form">
+				<h3>Name: </h3>
+					<input type="text" id="namecmt" name="namecmt"> <br>
+				<h3>Content: </h3>
+					<textarea name="noidungcmt" id="noidungcmt" cols="30" rows="5"></textarea>
+				<input type="button" id="addcmt" value="Add Comment">
+				<input type="hidden" id ="idcmt" name="idcmt" value="<%= data.post.id %>">
+			</div>
+		</div>
+		<div class="container motcmt">
+			
+		</div>
+	</div>
+
+</div>
 
 
 <div class="gioithieudaubep  wow fadeInUp daubepabout">
@@ -216,5 +234,7 @@
 		 Copyrights © 2015  All Rights Reserved. 
 	</div>
 
+
+		<script type="text/javascript" src="/static/js/comment.js"></script>
 </body>
 </html>

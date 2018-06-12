@@ -1,19 +1,18 @@
-function Slides(){
+function ChiNhanh(){
 	function bindEvent(){
-		$('.slide_edit').click(function(event) {
+		$('.chinhanh_edit').click(function(event) {
 			/* Act on the event */
 			var params = {
 				id: $('.id').val(),
-				title: $('.title').val(),
-				content: tinymce.get("content").getContent(),
-				button_content: $('.button_content').val(),
-				image: $('.image').val()
+				ten: $('.ten').val(),
+				thongtin: tinymce.get("thongtin").getContent(),
+				hinhanh: $('.hinhanh').val()
 			}
 
 			var base_url = location.protocol + "//" + document.domain + ":" + location.port;
 		
 			$.ajax({
-				url: base_url+"/admin/slides/suaslides",
+				url: base_url+"/admin/chinhanh/suachinhanh",
 				type: "PUT",
 				data: params,
 				dataType:"json",
@@ -26,17 +25,16 @@ function Slides(){
 
 		});
 
-		
-		$('.slide_xoa').click(function(event) {
+		$('.chinhanh_xoa').click(function(event) {
 			/* Act on the event */
-			var slides_id = $(this).attr("slides_id") 
+			var chinhanh_id = $(this).attr("chinhanh_id") ;
 			
 			var base_url = location.protocol + "//" + document.domain + ":" + location.port;
 		
 			$.ajax({
-				url: base_url+"/admin/slides/delete",
+				url: base_url+"/admin/chinhanh/delete",
 				type: "DELETE",
-				data: {id:slides_id},
+				data: {id:chinhanh_id},
 				dataType:"json",
 				success: function(res){
 					if(res && res.status_code == 200){
@@ -44,8 +42,8 @@ function Slides(){
 					}
 				}
 			});
-
 		});
+	
 	}
 
 	bindEvent();
@@ -53,5 +51,5 @@ function Slides(){
 
 
 $(document).ready(function() {
-	new Slides();
+	new ChiNhanh();
 });

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<%- include ../layout/head %>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  	<script>tinymce.init({ selector:'textarea' });</script>
+</head>
+<body>
+	<div class="container">
+		<%- include ../layout/menu %>
+
+		<div class="panel panel-default">
+           <!--  <div class="panel-heading">
+                Add new Post
+            </div> -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <%= typeof msg != 'undefined' ? msg : '' %>
+                             <form action="/admin/chinhanh/themchinhanh/themanh" method="POST" enctype="multipart/form-data">
+                                <div class="file-field input-field">
+                                  <div class="btn grey">
+                                    <span>File</span>
+                                    <input name="myImage" type="file">
+                                  </div>
+                                  <!-- <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                  </div> -->
+                                </div>
+                                <button type="submit" class="btn">Thêm Ảnh</button>
+                             </form>
+                             <br>
+                        <img src="<%= typeof file != 'undefined' ? file : '' %>" alt="" class="responsive-img" width="200px" height="200px">
+
+                    	<% if(data && data.error){%>
+			            <div id="login-alert" class="alert alert-danger col-sm-12">
+			               <%= data.error %> 
+			            </div>
+			            <%}%>
+
+                        <form role="form" class="AVAST_PAM_nonloginform" method="POST" action="/admin/chinhanh/themchinhanh">
+                            <div class="form-group">
+                                <label>Tên</label>
+                                <input type="text" class="form-control" name="ten" placeholder="Tên">         
+                            </div>
+                            
+                           
+                            <div class="form-group">
+                                <label>Thông Tin</label>
+                                <textarea type="text" class="form-control" name="thongtin" placeholder="Thông Tin"></textarea>        
+                            </div>
+                            
+                            <div class="form-group">
+                                
+                                <input type="hidden" class="form-control" name="hinhanh" value="<%= anhchinhanh %>">         
+                            </div> 
+                                    
+							<input type="submit" name="" value="Add" class="btn btn-warning">
+                        </form>
+
+                        
+						
+                
+
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+	</div> 
+</body>
+</html>

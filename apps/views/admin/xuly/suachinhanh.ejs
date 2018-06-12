@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<%- include ../layout/head %>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  	<script>tinymce.init({ selector:'textarea' });</script>
+</head>
+<body>
+	<div class="container">
+		<%- include ../layout/menu %>
+
+		<div class="panel panel-default">
+           <!--  <div class="panel-heading">
+                Add new Post
+            </div> -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                    	<% if(data && data.error){%>
+			            <div id="login-alert" class="alert alert-danger col-sm-12">
+			               <%= data.error %> 
+			            </div>
+			            <%}%>
+
+                        <form role="form" class="AVAST_PAM_nonloginform" method="" action="">
+                            <input type="hidden" name="id" class="id" value="<% if(data && data.post) {%> <%= data.post.id %> <%}%>">
+                            <div class="form-group">
+                                <label>Tên</label>
+                                <input type="text" class="form-control ten" name="ten"
+                                value="<% if(data && data.post) {%> <%= data.post.ten %> <%}%>">         
+                            </div>
+                             <div class="form-group">
+                                <label>Thông tin</label>
+                                <textarea type="text" class="form-control thongtin" name="thongtin"> <% if(data && data.post) {%> <%= data.post.thongtin %> <%}%></textarea>        
+                            </div>
+                        
+                            <div class="form-group">
+                                <input type="hidden" class="form-control hinhanh" name="hinhanh" value="<% if(data && data.post) {%> <%= data.post.hinhanh %> <%}%>">
+
+                            </div> 
+                                                        
+							<input type="button" name="" value="Edit" class="btn btn-warning chinhanh_edit">
+                        </form> 
+
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+	</div> 
+    
+    <script type="text/javascript" src="/static/js/chinhanh.js"></script>
+</body>
+</html>
