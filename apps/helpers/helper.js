@@ -3,7 +3,7 @@ var config = require("config")
 
 var TEMP = 0;
 var ID = -1;
-
+var out = -1;
 function hash_password(password){
 	var saltRounds = config.get("salt");
 
@@ -31,6 +31,14 @@ function get_ID(){
 
 function set_ID(a){
 	ID  = a;
+}
+
+function set_out(a){
+	ID  = a;
+}
+
+function get_out(){
+	return ID;
 }
 
 module.exports = {

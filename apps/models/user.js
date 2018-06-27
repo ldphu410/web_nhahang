@@ -38,6 +38,21 @@ function getUserByEmail(email){
 	return false
 }
 
+function getUserById(id){
+	if(id){
+		var defer = q.defer()
+		var query = conn.query('SELECT * FROM user WHERE ?',{id:id},(err,result)=>{
+			if(err){
+				defer.reject(err)
+			}else{
+				defer.resolve(result)
+			}
+		})
+		return defer.promise
+	}
+	return false
+}
+
 function getAllUser(){
 	var defer = q.defer()
 	var query = conn.query('SELECT * FROM user',(err,result)=>{
@@ -51,10 +66,28 @@ function getAllUser(){
 
 }
 
+function updateUser(params){
+	if(params){
+		var defer = q.defer()
+
+		var query = conn.query('UPDATE user SET first_name=?, last_name=?, email=?, password=? WHERE id=?',
+			[params.first_name, params.last_name, params.email, params.password, params.id], (err, result)=>{
+			if(err){
+				defer.reject(err)
+			}else{
+				defer.resolve(result)
+			}
+		}) 
+		return defer.promise
+	}
+	return false
+}
 
 
 module.exports = {
 	addUser: addUser,
 	getUserByEmail: getUserByEmail,
-	getAllUser: getAllUser
+	getAllUser: getAllUser,
+	getUserById:getUserById,
+	updateUser: updateUser
 }

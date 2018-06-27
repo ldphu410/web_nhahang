@@ -50,10 +50,28 @@ function getAllComment(){
 
 }
 
+function themComment(params){
+	if(params){
+		var defer = q.defer()
+
+		var query = conn.query('INSERT INTO comment SET ?', params, (err, result)=>{
+			if(err){
+				defer.reject(err)
+			}else{
+				defer.resolve(result)
+			}
+		})
+
+		return defer.promise
+	}
+	return false
+}
+
 
 
 module.exports = {
 	getCommentById: getCommentById,
 	getAllComment: getAllComment,
-	updateComment: updateComment
+	updateComment: updateComment,
+	themComment: themComment
 }

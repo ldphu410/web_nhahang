@@ -32,57 +32,66 @@ function hideURLbar(){ window.scrollTo(0,1); } </script> -->
 				<h2>Profile</h2>
 			</div>	
 			<!-- Thông tin user -->
-			<form action="#" method="post" class="form1">
+			<form action="/profile/edit/<%= id %>" method="POST" class="form1">
+				<div class="w3l-user" style="<%if (!data || !data.error) {%>display:none;
+                            <%}%>">
+                    <% if (data && data.error) {%>
+                  		<h2 style="color: black;"><%=data.error%></h3>
+                    <%}%>
+				</div>
+
 				<div class="w3l-user">
-					<span><i class="fa fa-user-circle-o w3l-1" aria-hidden="true"></i></span>
-					<input type="text" name="username" placeholder="username" />
+					<span><i class="fa fa-user w3l-1" aria-hidden="true"></i></span>
+					<input type="text" name="firstname" value="<%= user.first_name %>"/>
 					<div class="clear"></div>
 				</div>
-				
-				<div class="w3l-password">
-					<span><i class="fa fa-lock w3l-2" aria-hidden="true"></i></span>
-					<input type="password" name="password" placeholder="password" />
+
+				<div class="w3l-user">
+					<span><i class="fa fa-user w3l-1" aria-hidden="true"></i></span>
+					<input type="text" name="name" value="<%= user.last_name %>"/>
 					<div class="clear"></div>
 				</div>
 				
 				<div class="w3l-email">
 					<span><i class="fa fa-envelope-o w3l-3" aria-hidden="true"></i></span>
-					<input type="email" name="e-mail" placeholder="info@example.com" />
+					<input type="email" name="gmail"  value="<%= user.email %>"/>
 					<div class="clear"></div>
 				</div>
 				
-				<div class="w3l-phone">	
+				<!-- <div class="w3l-phone">	
 					<span><i class="fa fa-mobile w3l-4" aria-hidden="true"></i></span>
-					<input type="text" name="phone" placeholder="+001" />
+					<input type="text" name="phone" placeholder="Phone" />
 					<div class="clear"></div>
-				</div>
-				
-				<div class="w3l-btn">
-					<input type="submit" name="button" value="Edit"/>
-					<button class="button btn btn-warning change style_button">Change Password</button>
-				</div>
-			</form>
-			<!-- Cập nhật Pass -->
-			<form action="#" method="post" class="form2 an">
+				</div> -->
+
 				<div class="w3l-password">
 					<span><i class="fa fa-lock w3l-2" aria-hidden="true"></i></span>
-					<input type="password" name="oldpassword" placeholder="Old Password" required=""/>
+					<input type="password" name="oldpassword" placeholder="Old Password" class="thaydoi"
+						/>
 					<div class="clear"></div>
 				</div>
 				<div class="w3l-password">
 					<span><i class="fa fa-lock w3l-2" aria-hidden="true"></i></span>
-					<input type="password" name="newpassword" placeholder="New Password" required=""/>
+					<input type="password" name="newpassword" placeholder="New Password" class="an"/>
 					<div class="clear"></div>
 				</div>
 				<div class="w3l-password">
 					<span><i class="fa fa-lock w3l-2" aria-hidden="true"></i></span>
-					<input type="password" name="confirmpassword" placeholder="Confirm New Password" required=""/>
+					<input type="password" name="confirmpassword" placeholder="Confirm New Password" class="an"/>
 					<div class="clear"></div>
 				</div>	
-				<div class="w3l-btn">
-					<input type="submit" name="button" value="Change"/>
-					<button class="btn btn-warning back style_button">Back</button>
+				
+				<div class="w3l-btn k">
+					<input type="submit" name="button" value="Edit"/>
+					<a href="/" class="button back" >Back</a>
 				</div>
+				<!-- <div class="w3l-btn">
+					
+					<button class="button btn btn-warning change style_button">Change Password</button>
+				</div> -->
+
+				<input type="hidden" name="id" value="<%= id %>"/>
+
 			</form>
 		</div>
 </div>

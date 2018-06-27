@@ -67,11 +67,12 @@ body{
     }
 }*/
 
-.an{
-	display: none;
+/*.an{*/
+	/*display: none;*/
 	/*opacity: 0;
 	visibility:hidden;*/
-}
+	
+/*}*/
 
 .style_button{
 	font-size: 15px;
@@ -86,6 +87,17 @@ body{
 	border: none;
 	outline: none;
 	font-family: 'Raleway', sans-serif;
+}
+
+.back{
+	padding: 5px;
+	color: white;
+	border: 1px solid white;
+}
+
+.k:hover .back{
+	color: black;
+	background: white;
 }
 
 .form-w3l {

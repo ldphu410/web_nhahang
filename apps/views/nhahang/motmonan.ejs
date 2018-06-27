@@ -9,6 +9,7 @@
 
 
 	<script type="text/javascript" src="/static/vendor/bootstrap.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 
 
  	<script type="text/javascript" src="/static/vendor/isotope.pkgd.min.js"></script>
@@ -18,6 +19,8 @@
 	<link rel="stylesheet" href="/static/vendor/bootstrap.css">
 	<link rel="stylesheet" href="/static/vendor/font-awesome.css">
 	<link rel="stylesheet" href="/static/css/1.css">
+	<link rel="stylesheet" href="/static/css/comment.css">
+
  </head>
 <body >
 
@@ -51,17 +54,17 @@
 			       
 			      </button>
 			      <div class="collapse navbar-toggleable-xs" id="mtren">
-			        <a class="navbar-brand text-xs-center text-sm-left" href="#"><img src="images/logo.png" alt=""></a>
+			        <a class="navbar-brand text-xs-center text-sm-left" href="/"><img src="/static/images/logo.png" alt=""></a>
 
 			        <ul class="nav navbar-nav float-sm-right">
 			          <li class="nav-item">
 			            <a class="nav-link" href="/">Home  </a>
 			          </li>
 			          <li class="nav-item active">
-			            <a class="nav-link" href="/admin">Admin</a>
+			            <a class="nav-link" href="/menu">Menu</a>
 			          </li>
 			          <li class="nav-item">
-			            <a class="nav-link" href="/admin/signin">Sign in</a>
+			            <a class="nav-link" href="/map">Map</a>
 			          </li>
 			         <!--  <li class="nav-item">
 			            <a class="nav-link" href="thucdon.html">Menu</a>
@@ -118,26 +121,80 @@
 			</div>
 
 		</div>
+
 	</div>  <!-- HET THONG TIN 2 ABOUT -->
 
-<div class="comment  wow fadeInUp">
-	<div class="container">
-		<div class="row nhapcmt">
-			<div class="form">
-				<h3>Name: </h3>
-					<input type="text" id="namecmt" name="namecmt"> <br>
-				<h3>Content: </h3>
-					<textarea name="noidungcmt" id="noidungcmt" cols="30" rows="5"></textarea>
-				<input type="button" id="addcmt" value="Add Comment">
-				<input type="hidden" id ="idcmt" name="idcmt" value="<%= data.post.id %>">
+<div class="container wow fadeInUp">
+	<hr/>
+</div>
+ <div class="row wow fadeInUp">
+
+		<div class="col-md-12">
+		    <div class="blog-comment">
+		    	<h3 class="text-success">Comments</h3>
+          <!--       <hr class="thehr"/> -->
+				<ul class="comments">
+				<li class="clearfix">
+				  <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+				
+				  <div class="post-comments">
+				     <!--  <p class="meta">Dec 18, 2014 <a class="thea" href="#">JohnDoe</a> says : <i class="pull-right"><a class="thea" href="#"><small>Reply</small></a></i></p> -->
+				    	
+				     <div class="row">	
+				     	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				     		
+								<input type="text" class="namecmt meta pull-right" name="namecmt" placeholder="  ...Name">
+								
+				     			 <br>
+				     			<input type="button" name="" value="Add" class="btn btn-warning addcmt stylebutton pull-right">
+				     			<input type="hidden" name="idcmt" class="idcmt" value="<%= data.post.id %>">
+				     	</div>
+				      	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				     		 <textarea name="noidungcmt" class="noidungcmt" placeholder="  ... Content"></textarea> 		
+				      	</div>
+				     	
+				     </div>
+				     
+				  </div>
+				</li>
+				</ul>
 			</div>
 		</div>
-		<div class="container motcmt">
-			
-		</div>
-	</div>
 
-</div>
+		<div class="col-md-12">
+		    <div class="blog-comment">
+				<!-- <h3 class="text-success">Comments</h3>
+                <hr class="thehr"/> -->
+				<ul class="comments moc">
+				<li style="display: none;"></li>
+				<% for(var i = arrcmt.length - 1; i>=0; i-- ){%>
+				<li class="clearfix">
+				  <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+				  <div class="post-comments">
+				      <p class="meta"><%= arrcmt[i].time %> <a class="thea" href="#"><%= arrcmt[i].name %></a> says : <i class="pull-right"><a class="thea" href="#"></a></i></p>
+				      <p>
+				          <%= arrcmt[i].noidung %>
+				      </p>
+				  </div>
+				</li>
+				<%}%>
+			
+				<!-- <li class="clearfix">
+				  <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+				  <div class="post-comments">
+				      <p class="meta">Dec 18, 2014 <a class="thea" href="#">JohnDoe</a> says : <i class="pull-right"><a class="thea" href="#"><small>Reply</small></a></i></p>
+				      <p>
+				          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				          Etiam a sapien odio, sit amet
+				      </p>
+				  </div>
+				</li> -->
+				</ul>
+			</div>
+		</div>
+
+
+	</div>
 
 
 <div class="gioithieudaubep  wow fadeInUp daubepabout">
@@ -164,13 +221,13 @@
  	</div><!--  HET GIOI THIEU DAU BEP	 -->
 
 
-	<div class="footertop">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3 cotf1 mb-2 wow fadeInUp" data-wow-delay="0s">
-					<a href=""><img src="/static/images/logofoot.png" alt="" class="logof"></a>
-					<p>Marsh mallow muffin soufflé jelly-o tart cake Marshmallow macaroon jelly jubes dont tiramisu croissant cake.</p>
-					<div class="motdong">
+   <div class="footertop">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 cotf1 mb-2 wow fadeInUp" data-wow-delay="0s">
+                            <a href=""><img src="/static/images/logofoot.png" alt="" class="logof"></a>
+                            <p>You are everything of us.</p>
+                            <!-- <div class="motdong">
 						<i class="fa fa-paper-plane-o"></i>
 						<span class="textmd">Address : 44 New Design Street,<br>
 						Melbourne 005</span>
@@ -182,59 +239,53 @@
 					<div class="motdong">
 						<i class="fa fa-envelope-o"></i>
 						<span class="textmd">Email : info@Example.com</span>
-					</div>
-					
+					</div> -->
+                        </div>
+                        <!-- HET COTF1 -->
+                        <div class="col-sm-2 push-sm-1 cotf2 mb-2  wow fadeInUp" data-wow-delay="0.1s">
+                            <h2 class="tdft">Category </h2>
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/admin">Admin  </a></li>
+                                <li><a href="/admin/signin">Sign in  </a></li>
+                            </ul>
+                        </div>
+                        <!-- HET COTF2 -->
+                        <div class="col-sm-3  cotf3 mb-2 wow  fadeInUp" data-wow-delay="0.2s">
+                            <h2 class="tdft">Member</h2>
+                            <ul>
+                                <li><a href="https://www.facebook.com/thang.nam.1865">Thang Vỹ Nam-1512341 </a></li>
+                                <li><a href="https://www.facebook.com/hungphat119">Nguyễn Hưng Phát-1512393  </a></li>
+                                <li><a href="https://www.facebook.com/phu.ledinh.982">Lê Đình Phú-1512411  </a></li>
+                            </ul>
+                        </div>
+                        <!-- HET COTF3 -->
+                        <div class="col-sm-3  cotf4 wow  fadeInUp" data-wow-delay="0.3s">
+                            <h2 class="tdft">Openning hours </h2>
+                            <div class="openning1">
+                                <div class="phai float-xs-right">9:00 am - 23:00 pm</div>
+                                <div class="trai">Mon — Fri</div>
+                            </div>
+                            <div class="openning1">
+                                <div class="phai float-xs-right">10:00 am - 23:00 pm</div>
+                                <div class="trai">Saturday </div>
+                            </div>
+                            <div class="openning1">
+                                <div class="phai float-xs-right">10:00 am - 23:00 pm</div>
+                                <div class="trai">Sunday </div>
+                            </div>
+                            <p>Note: Arctica Restaurant is closed on holidays.</p>
+                        </div>
+                        <!-- HET COTF4 -->
+                    </div>
+                </div>
+            </div>
+            <!-- HET FOOTERTOP -->
+            <div class="footerbottom text-xs-center fontroboto wow  fadeInUp" data-wow-delay="0s">
+                Copyrights © 2018 All Rights Reserved.
+            </div>
 
-				</div>  <!-- HET COTF1 -->
-				<div class="col-sm-2 push-sm-1 cotf2 mb-2  wow fadeInUp" data-wow-delay="0.1s">
-					<h2 class="tdft">Userfull Link </h2>
-					<ul>
-						<li><a href="">About company </a></li>
-						<li><a href="">Reservation  </a></li>
-						<li><a href="">Help center  </a></li>
-						<li><a href="">Our Blog  </a></li>
-						<li><a href="">Careers  </a></li>
-						<li><a href="">Contact us  </a></li>
-					</ul>
-				</div>  <!-- HET COTF2 -->
-				<div class="col-sm-3  cotf3 mb-2 wow  fadeInUp" data-wow-delay="0.2s">
-					<h2 class="tdft">Userfull Link 2 </h2>
-					<ul>
-						<li><a href="">About company </a></li>
-						<li><a href="">Reservation  </a></li>
-						<li><a href="">Help center  </a></li>
-						<li><a href="">Our Blog  </a></li>
-						<li><a href="">Careers  </a></li>
-						<li><a href="">Contact us  </a></li>
-					</ul>
-				</div>  <!-- HET COTF3 -->
-				<div class="col-sm-3  cotf4 wow  fadeInUp" data-wow-delay="0.3s">
-					<h2 class="tdft">Openning hours </h2>
-					<div class="openning1">
-						<div class="phai float-xs-right">9:00 am - 23:00 pm</div>
-						<div class="trai">Mon — Fri</div>
-					</div>
-					 <div class="openning1">
-						<div class="phai float-xs-right">10:00 am - 23:00 pm</div>
-						<div class="trai">Saturday </div>
-					</div>
-					 <div class="openning1">
-						<div class="phai float-xs-right">10:00 am - 23:00 pm</div>
-						<div class="trai">Sunday   </div>
-					</div>
-					 
-					<p>Note: Arctica Restaurant is closed on holidays.</p>
-				</div>  <!-- HET COTF4 -->
-				
-			</div>
-		</div>
-	</div>  <!-- HET FOOTERTOP -->
-
-	<div class="footerbottom text-xs-center fontroboto wow  fadeInUp" data-wow-delay="0s">
-		 Copyrights © 2015  All Rights Reserved. 
-	</div>
-
-
-		<script type="text/javascript" src="/static/js/comment.js"></script>
+	<script type="text/javascript" src="/static/js/comment.js"></script>
+		
 </body>
 </html>
