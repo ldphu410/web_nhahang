@@ -16,6 +16,7 @@ var phantrang_md = require("../models/phantrang")
 var chinhanh_md = require("../models/chinhanh")
 var comment_md = require("../models/comment")
 var date_md = require("../models/book")
+var admin_md = require("../models/admin")
 
 
 var limit = 9
@@ -89,12 +90,31 @@ router.get("/", (req, res) => {
                 cacmonan: dt,
                 error: false
             }
+          
             if (helper.get_TEMP() === 0) {
                  res.render("nhahang/trangchu", { data: allMonAn, _trang: data1, header: header1, slides: slides1, menuTC: menuTC1, chinhanh: chinhanh1, page: page })
             }
             if (helper.get_TEMP() === 1) {
                 var iduser = helper.get_ID()
                 var user = user_md.getUserById(iduser)
+                user.then((dt) => {
+                    res.render("nhahang/trangchu2", {
+                        data: allMonAn,
+                        header: header1,
+                        _trang: data1,
+                        slides: slides1,
+                        menuTC: menuTC1,
+                        chinhanh: chinhanh1,
+                        page:page,
+                        user: dt[0]
+                    })
+                })
+
+            }
+            if (helper.get_TEMP() === 2) {
+                var iduser = helper.get_ID()
+              
+                var user = admin_md.getAdminById(iduser)
                 user.then((dt) => {
                     res.render("nhahang/trangchu2", {
                         data: allMonAn,

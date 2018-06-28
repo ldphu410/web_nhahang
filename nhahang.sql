@@ -289,7 +289,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'abc@gmail.com','keuhfZG$7lmhk~m^Iq','',''),(2,'phuld410@gmail.com','123456','Le','Phu'),(3,'ldphu410@gmail.com','123456','Phu','Phu'),(4,'xyz@gmail.com','$2b$10$h5zSdh6tu1OpZ.1vPYoXXezZQZ2VLZauurlPPFvv64Shzyb38tEze','Le','Van AB'),(5,'ldphu410@gmail.com','$2b$10$oxpc1.vMqON/yKeIFBGscOEulzSgP4JVZBWjYth9T3kr4xAHjlZ02','Le','Phu'),(25,'test','$2b$10$JfyVoXgU9RPh4L/PgPLcvuQtZN/ILnl6BChu3HPhdyOHZjpaQ5Acy','phu','le'),(26,'test2','$2b$10$/VLAKhTvQsHV1zRFB7J0UORUOja3qyjaaf4vQA7DJsMLNRgrP6ZQe','le','phuuuu'),(27,'test3','$2b$10$6dabXvCV0KREI3/ciSmm2ewFeIvWfmA7SIFnYjYr6uGPyp.RkXxqi','Le ','Phu'),(28,'ldphu410@gmail.com','$2b$10$UfKRztxPoHDIeD3W6UIwGOJZLkvGWu3VLkeKoAsad5w447H7uRT6u','Le Dinh','Phu'),(29,'nuthde@gmail.com','$2b$10$vbUz47iPG5n1HenD2Srvse7lOebyEa6m2VZ26qtSYNNFsAeo3OFRi','Le','PhuAAA');
+INSERT INTO `user` VALUES (2,'phuld410@gmail.com','123456','Le','Phu'),(3,' ldphu410@gmail.com ','123456','NGuyen Hung','Phat'),(4,'xyz@gmail.com','$2b$10$h5zSdh6tu1OpZ.1vPYoXXezZQZ2VLZauurlPPFvv64Shzyb38tEze','Le','Van AB'),(5,'ldphu410@gmail.com','$2b$10$oxpc1.vMqON/yKeIFBGscOEulzSgP4JVZBWjYth9T3kr4xAHjlZ02','Le','Phu'),(25,'test','$2b$10$JfyVoXgU9RPh4L/PgPLcvuQtZN/ILnl6BChu3HPhdyOHZjpaQ5Acy','phu','le'),(26,'test2','$2b$10$/VLAKhTvQsHV1zRFB7J0UORUOja3qyjaaf4vQA7DJsMLNRgrP6ZQe','le','phuuuu'),(27,'test3','$2b$10$6dabXvCV0KREI3/ciSmm2ewFeIvWfmA7SIFnYjYr6uGPyp.RkXxqi','Le ','Phu'),(28,'ldphu410@gmail.com','$2b$10$UfKRztxPoHDIeD3W6UIwGOJZLkvGWu3VLkeKoAsad5w447H7uRT6u','Le Dinh','Phu'),(29,'nuthde@gmail.com','$2b$10$vbUz47iPG5n1HenD2Srvse7lOebyEa6m2VZ26qtSYNNFsAeo3OFRi','Le','PhuAAA');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -302,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-27 16:56:21
+-- Dump completed on 2018-06-28 21:45:36

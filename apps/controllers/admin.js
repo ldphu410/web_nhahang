@@ -178,7 +178,7 @@ router.post("/admin_signin", (req, res) => {
                         })
                     }
                     req.session.admin = user
-                    helper.set_TEMP(1)
+                    helper.set_TEMP(2)
                     helper.set_ID(user.id)
 
                     res.render("admin/admin", { admin: user })
@@ -1374,10 +1374,10 @@ router.get("/datban/in", (req, res) => {
 })
 
 router.get("/signout", (req, res) => {
-    helper.set_ID(-1)
-    helper.set_TEMP(0)
     req.session.destroy((err) => {
         if (err) { console.log("FAILED") } else { console.log("SUCCESS") }
+         helper.set_TEMP(0)
+         helper.set_ID(-1)
     })
     res.render("signin", { data: {} })
 })
@@ -1385,6 +1385,8 @@ router.get("/signout", (req, res) => {
 router.get("/admin_signout", (req, res) => {
     req.session.destroy((err) => {
         if (err) { console.log("FAILED") } else { console.log("SUCCESS") }
+        helper.set_TEMP(0)
+        helper.set_ID(-1)
     })
     res.render("admin_signin", { data: {} })
 })
@@ -1506,10 +1508,85 @@ router.post("/doanhthu/loc", (req, res) => {
 
         })
     }
-
-
-
 })
+
+
+//===============================User===========================
+router.get("/user",(req,res)=>{
+     if (req.session.admin) {
+    var user = user_md.getAllUser()
+    user.then((dt)=>{
+        var data = {
+            user: dt,
+            error:false
+        }
+        res.render("admin/xuly/users",{data:data})
+    }) 
+    }else{
+        res.redirect("/admin/admin_signin")
+    }   
+})
+
+router.delete("/user/delete", (req, res) => {
+    var user_id = req.body.id
+    var data = user_md.deleteUser(user_id)
+
+    if (!data) {
+        res.json({ status_code: 500 })
+    } else {
+        data.then((result) => {
+            res.json({ status_code: 200 })
+        }).catch(function(err) {
+            res.json({ status_code: 500 })
+        })
+    }
+})
+
+router.get("/user/suauser/:id", (req, res) => {
+    if (req.session.admin) {
+        var params = req.params
+        var id = params.id
+
+        var data = user_md.getUserById(id)
+
+        if (data) {
+            data.then((posts) => {
+                var post = posts[0]
+                var data = {
+                    post: post,
+                    error: false
+                }
+
+                res.render("admin/xuly/suauser", { data: data })
+            }).catch((err) => {
+                var data = { error: "Could not get User by ID" }
+                res.render("admin/xuly/suauser", { data: data })
+            })
+        } else {
+            var data = { error: "Could not get User by ID" }
+            res.render("admin/xuly/suauser", { data: data })
+        }
+    } else {
+        res.redirect("/admin/admin_signin")
+    }
+})
+
+router.put("/user/suauser", (req, res) => {
+    var params = req.body
+
+    data = user_md.updateUser(params)
+
+    if (!data) {
+        res.json({ status_code: 500 })
+    } else {
+        data.then((result) => {
+            res.json({ status_code: 200 })
+        }).catch(function(err) {
+            res.json({ status_code: 500 })
+        })
+    }
+})
+
 
 
 

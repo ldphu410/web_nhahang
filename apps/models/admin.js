@@ -51,10 +51,25 @@ function getAllAdmin(){
 
 }
 
+function getAdminById(id){
+	if(id){
+		var defer = q.defer()
+		var query = conn.query('SELECT * FROM admin WHERE ?',{id:id},(err,result)=>{
+			if(err){
+				defer.reject(err)
+			}else{
+				defer.resolve(result)
+			}
+		})
+		return defer.promise
+	}
+	return false
+}
 
 
 module.exports = {
 	addAdmin: addAdmin,
 	getAdminByEmail: getAdminByEmail,
-	getAllAdmin: getAllAdmin
+	getAllAdmin: getAllAdmin,
+	getAdminById:getAdminById
 }

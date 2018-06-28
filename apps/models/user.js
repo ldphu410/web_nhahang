@@ -70,8 +70,24 @@ function updateUser(params){
 	if(params){
 		var defer = q.defer()
 
-		var query = conn.query('UPDATE user SET first_name=?, last_name=?, email=?, password=? WHERE id=?',
-			[params.first_name, params.last_name, params.email, params.password, params.id], (err, result)=>{
+		var query = conn.query('UPDATE user SET first_name=?, last_name=?, email=?  WHERE id=?',
+			[params.first_name, params.last_name, params.email, params.id], (err, result)=>{
+			if(err){
+				defer.reject(err)
+			}else{
+				defer.resolve(result)
+			}
+		}) 
+		return defer.promise
+	}
+	return false
+}
+
+function deleteUser(id){
+	if(id){
+		var defer = q.defer()
+
+		var query = conn.query('DELETE FROM user WHERE id=?',[id], (err, result)=>{
 			if(err){
 				defer.reject(err)
 			}else{
@@ -89,5 +105,6 @@ module.exports = {
 	getUserByEmail: getUserByEmail,
 	getAllUser: getAllUser,
 	getUserById:getUserById,
-	updateUser: updateUser
+	updateUser: updateUser,
+	deleteUser: deleteUser
 }
